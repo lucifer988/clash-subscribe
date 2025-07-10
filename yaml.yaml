@@ -9,7 +9,7 @@ proxies:
   - name: US-BWG
     type: socks5
     server: 192.168.88.104
-    port: 1081
+    port: 1080
     username: test
     password: 123456
 
