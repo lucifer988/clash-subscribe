@@ -1,16 +1,16 @@
 proxies:
-  - name: HK-DV
+  - name: HK-Vol
     type: socks5
-    server: 192.168.88.100
+    server: 192.168.88.102
     port: 1080
     username: test
     password: 123456
 
-  - name: HK-bage-v6
+  - name: US-BWG
     type: socks5
-    server: 192.168.5.10
+    server: 192.168.88.104
     port: 1081
-    username: admin
-    password: password
+    username: test
+    password: 123456
 
 
