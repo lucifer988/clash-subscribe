@@ -12,5 +12,12 @@ proxies:
     port: 1080
     username: test
     password: 123456
+  
+  - name: HK-CnFaster
+    type: socks5
+    server: 192.168.88.105
+    port: 1080
+    username: test
+    password: 123456
 
 
