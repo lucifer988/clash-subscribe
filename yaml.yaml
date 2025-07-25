@@ -20,4 +20,10 @@ proxies:
     username: test
     password: 123456
 
+  - name: AWS-JP
+    type: socks5
+    server: 192.168.88.103
+    port: 1080
+    username: test
+    password: 123456
 
