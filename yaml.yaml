@@ -13,9 +13,16 @@ proxies:
     username: test
     password: 123456
   
-  - name: US-艾云GIA
+  - name: US-GIA
     type: socks5
     server: 192.168.88.105
+    port: 1080
+    username: test
+    password: 123456
+
+   - name: Nube-DE
+    type: socks5
+    server: 192.168.88.103
     port: 1080
     username: test
     password: 123456
