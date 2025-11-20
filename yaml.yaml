@@ -27,7 +27,7 @@ proxies:
     username: test
     password: 123456
     
-  - name: RFC-HK
+  - name: JPCO-US
     type: socks5
     server: 192.168.88.107
     port: 1080
