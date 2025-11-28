@@ -1,4 +1,11 @@
 proxies:
+  - name: RFC
+    type: socks5
+    server: 192.168.88.108
+    port: 1080
+    username: test
+    password: 123456
+    
   - name: HK-Vol
     type: socks5
     server: 192.168.88.102
@@ -33,4 +40,5 @@ proxies:
     port: 1080
     username: test
     password: 123456
+
 
