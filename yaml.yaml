@@ -1,5 +1,5 @@
 proxies:
-  - name: RFC
+  - name: RFC-JP
     type: socks5
     server: 192.168.88.108
     port: 1080
@@ -13,21 +13,21 @@ proxies:
     username: test
     password: 123456
 
-  - name: US-GIA
+  - name:RFC-HK
     type: socks5
     server: 192.168.88.100
     port: 1080
     username: test
     password: 123456
   
-  - name: US-BWH
+  - name: US-GIA
     type: socks5
     server: 192.168.88.105
     port: 1080
     username: test
     password: 123456
 
-  - name: ISIF-COM
+  - name: ISIF-COP
     type: socks5
     server: 192.168.88.103
     port: 1080
