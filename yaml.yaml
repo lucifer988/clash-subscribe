@@ -13,7 +13,7 @@ proxies:
     username: test
     password: 123456
 
-  - name:RFC-HK
+  - name: RFC-HK
     type: socks5
     server: 192.168.88.100
     port: 1080
