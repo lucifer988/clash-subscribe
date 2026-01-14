@@ -13,20 +13,6 @@ proxies:
     username: test
     password: 123456
 
-  - name: SS-Rust-BJ9929
-    type: socks5
-    server: fastu9929.kxy.ovh
-    port: 52832
-    username: test
-    password: 123456
-
-  - name: SS-Rust-BJCU
-    type: socks5
-    server: fastu.kxy.ovh
-    port: 52832
-    username: test
-    password: 123456
-
   - name: YXVM-Vol
     type: socks5
     server: 192.168.88.102
