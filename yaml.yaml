@@ -1,44 +1,119 @@
 proxies:
+  - name: ISIF-COP-2
+    type: socks5
+    server: 192.168.88.103
+    port: 29923
+    username: test
+    password: 123456
+
   - name: RFC-JP
     type: socks5
     server: 192.168.88.108
-    port: 1080
+    port: 28058
     username: test
     password: 123456
-    
-  - name: HK-Vol
+
+  - name: SS-Rust-BJ9929
+    type: socks5
+    server: fastu9929.kxy.ovh
+    port: 52832
+    username: test
+    password: 123456
+
+  - name: SS-Rust-BJCU
+    type: socks5
+    server: fastu.kxy.ovh
+    port: 52832
+    username: test
+    password: 123456
+
+  - name: YXVM-Vol
     type: socks5
     server: 192.168.88.102
     port: 1080
     username: test
     password: 123456
 
-  - name: RFC-HK
-    type: socks5
-    server: 192.168.88.100
-    port: 1080
-    username: test
-    password: 123456
-  
-  - name: US-GIA
+  - name: RFC-HK-KX
     type: socks5
     server: 192.168.88.105
-    port: 1080
+    port: 29301
     username: test
     password: 123456
 
-  - name: ISIF-COP
+  - name: RFC-HK-JP
+    type: socks5
+    server: 192.168.88.105
+    port: 33687
+    username: test
+    password: 123456
+
+  - name: RFC-HK-Alice
+    type: socks5
+    server: 192.168.88.105
+    port: 31759
+    username: test
+    password: 123456
+
+  - name: RFC-HK
+    type: socks5
+    server: 192.168.88.105
+    port: 27560
+    username: test
+    password: 123456
+
+  - name: ISIF-COP-2-Alice
     type: socks5
     server: 192.168.88.103
-    port: 1080
+    port: 17744
     username: test
     password: 123456
-    
-  - name: JPCO-US
+
+  - name: ISIF-COP-2-KX
     type: socks5
-    server: 192.168.88.107
-    port: 1080
+    server: 192.168.88.103
+    port: 20129
     username: test
     password: 123456
 
+  - name: ISIF-COP-2-AK
+    type: socks5
+    server: 192.168.88.103
+    port: 24523
+    username: test
+    password: 123456
 
+  - name: ISIF-COP-1-AK
+    type: socks5
+    server: 192.168.88.100
+    port: 25229
+    username: test
+    password: 123456
+
+  - name: ISIF-COP-1-KX
+    type: socks5
+    server: 192.168.88.100
+    port: 26330
+    username: test
+    password: 123456
+
+  - name: ISIF-COP-1
+    type: socks5
+    server: 192.168.88.100
+    port: 12610
+    username: test
+    password: 123456
+
+  - name: ISIF-COP-1-Alice
+    type: socks5
+    server: 192.168.88.100
+    port: 22063
+    username: test
+    password: 123456
+
+  - name: RFC-JP-US
+    type: socks5
+    server: 192.168.88.108
+    port: 35149
+    username: test
+    password: 123456
