@@ -1,3 +1,37 @@
+mixed-port: 7890
+redir-port: 7892
+tproxy-port: 7893
+allow-lan: true
+bind-address: 0.0.0.0
+mode: rule
+log-level: info
+ipv6: false
+
+external-controller: 0.0.0.0:9090
+secret: ""
+
+# 你是内网用，建议把 LAN 访问限制在你网段（可选）
+# bind-address: 192.168.88.0/24  # 如果内核支持此写法再用
+
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  fallback:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+
+# ====== 你的节点 ======
 proxies:
   - name: ISIF-COP-2
     type: socks5
@@ -103,3 +137,166 @@ proxies:
     port: 35149
     username: test
     password: 123456
+
+# ====== 分流组设计 ======
+proxy-groups:
+  # 1) 全局总开关：你可以在面板里随时切换策略
+  - name: GLOBAL
+    type: select
+    proxies:
+      - DIRECT
+      - AI
+      - FOREIGN
+      - PROXY
+      - GAME-CN
+      - REJECT
+
+  # 2) 国外AI专用：默认走国外（可手动切换）
+  - name: AI
+    type: select
+    proxies:
+      - AI-AUTO
+      - RFC-JP
+      - RFC-JP-US
+      - RFC-HK
+      - RFC-HK-JP
+      - YXVM-Vol
+      - PROXY
+      - DIRECT
+
+  - name: AI-AUTO
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 80
+    proxies:
+      - RFC-JP
+      - RFC-JP-US
+      - RFC-HK
+      - RFC-HK-JP
+      - RFC-HK-KX
+      - RFC-HK-Alice
+      - YXVM-Vol
+
+  # 3) 国外通用（不特指AI）：日常外网、GitHub、Google 等
+  - name: FOREIGN
+    type: select
+    proxies:
+      - FOREIGN-AUTO
+      - RFC-HK
+      - RFC-JP
+      - RFC-JP-US
+      - YXVM-Vol
+      - PROXY
+      - DIRECT
+
+  - name: FOREIGN-AUTO
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 120
+    proxies:
+      - RFC-HK
+      - RFC-JP
+      - RFC-JP-US
+      - RFC-HK-JP
+      - YXVM-Vol
+
+  # 4) 你的“代理池”（手动挑选/兜底用）
+  - name: PROXY
+    type: select
+    proxies:
+      - RFC-HK
+      - RFC-JP
+      - RFC-JP-US
+      - RFC-HK-JP
+      - RFC-HK-KX
+      - RFC-HK-Alice
+      - ISIF-COP-1
+      - ISIF-COP-1-Alice
+      - ISIF-COP-1-KX
+      - ISIF-COP-1-AK
+      - ISIF-COP-2
+      - ISIF-COP-2-Alice
+      - ISIF-COP-2-KX
+      - ISIF-COP-2-AK
+      - YXVM-Vol
+      - DIRECT
+
+  # 5) 国内游戏：强制直连（你说国内游戏要国内）
+  - name: GAME-CN
+    type: select
+    proxies:
+      - DIRECT
+      - PROXY
+      - FOREIGN
+
+rules:
+  # ====== 直连要求（最先匹配）======
+  - DOMAIN-SUFFIX,local,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
+
+  # ====== 国内游戏（常见厂商/平台域名，直连）======
+  - DOMAIN-SUFFIX,qq.com,GAME-CN
+  - DOMAIN-SUFFIX,tencent.com,GAME-CN
+  - DOMAIN-SUFFIX,wegame.com,GAME-CN
+  - DOMAIN-SUFFIX,game.qq.com,GAME-CN
+  - DOMAIN-SUFFIX,msdk.qq.com,GAME-CN
+  - DOMAIN-SUFFIX,igamecj.com,GAME-CN
+  - DOMAIN-SUFFIX,netease.com,GAME-CN
+  - DOMAIN-SUFFIX,163.com,GAME-CN
+  - DOMAIN-SUFFIX,126.net,GAME-CN
+  - DOMAIN-SUFFIX,mihoyo.com,GAME-CN
+  - DOMAIN-SUFFIX,miHoYo.com,GAME-CN
+  - DOMAIN-SUFFIX,hoyoverse.com,GAME-CN
+  - DOMAIN-SUFFIX,biligame.com,GAME-CN
+  - DOMAIN-SUFFIX,bilibili.com,GAME-CN
+  - DOMAIN-SUFFIX,ppgame.com,GAME-CN
+
+  # ====== 国外 AI（强制走 AI 组）======
+  - DOMAIN-SUFFIX,openai.com,AI
+  - DOMAIN-SUFFIX,chatgpt.com,AI
+  - DOMAIN-SUFFIX,oaistatic.com,AI
+  - DOMAIN-SUFFIX,oaiusercontent.com,AI
+  - DOMAIN-SUFFIX,anthropic.com,AI
+  - DOMAIN-SUFFIX,claude.ai,AI
+  - DOMAIN-SUFFIX,googleapis.com,AI
+  - DOMAIN-SUFFIX,generativeai.google,AI
+  - DOMAIN-SUFFIX,gemini.google.com,AI
+  - DOMAIN-SUFFIX,ai.google,AI
+  - DOMAIN-SUFFIX,deepmind.com,AI
+  - DOMAIN-SUFFIX,huggingface.co,AI
+  - DOMAIN-SUFFIX,hf.co,AI
+  - DOMAIN-SUFFIX,replicate.com,AI
+  - DOMAIN-SUFFIX,perplexity.ai,AI
+  - DOMAIN-SUFFIX,cohere.com,AI
+  - DOMAIN-SUFFIX,mistral.ai,AI
+  - DOMAIN-SUFFIX,poe.com,AI
+  - DOMAIN-SUFFIX,character.ai,AI
+
+  # ====== 其他国外常用（走 FOREIGN）======
+  - DOMAIN-SUFFIX,github.com,FOREIGN
+  - DOMAIN-SUFFIX,githubusercontent.com,FOREIGN
+  - DOMAIN-SUFFIX,gitlab.com,FOREIGN
+  - DOMAIN-SUFFIX,google.com,FOREIGN
+  - DOMAIN-SUFFIX,gstatic.com,FOREIGN
+  - DOMAIN-SUFFIX,youtube.com,FOREIGN
+  - DOMAIN-SUFFIX,ytimg.com,FOREIGN
+  - DOMAIN-SUFFIX,facebook.com,FOREIGN
+  - DOMAIN-SUFFIX,twitter.com,FOREIGN
+  - DOMAIN-SUFFIX,x.com,FOREIGN
+  - DOMAIN-SUFFIX,telegram.org,FOREIGN
+  - DOMAIN-SUFFIX,discord.com,FOREIGN
+
+  # ====== 智能国内/国外（Meta 支持 GEOSITE）======
+  # 国内域名直连
+  - GEOSITE,CN,DIRECT
+  # 国内 IP 直连
+  - GEOIP,CN,DIRECT
+
+  # 兜底：剩下全部走你全局选择
+  - MATCH,GLOBAL
