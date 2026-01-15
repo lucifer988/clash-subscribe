@@ -10,9 +10,6 @@ ipv6: false
 external-controller: 0.0.0.0:9090
 secret: ""
 
-# 你是内网用，建议把 LAN 访问限制在你网段（可选）
-# bind-address: 192.168.88.0/24  # 如果内核支持此写法再用
-
 dns:
   enable: true
   listen: 0.0.0.0:1053
@@ -31,7 +28,6 @@ dns:
     ipcidr:
       - 240.0.0.0/4
 
-# ====== 你的节点 ======
 proxies:
   - name: ISIF-COP-2
     type: socks5
@@ -138,101 +134,113 @@ proxies:
     username: test
     password: 123456
 
-# ====== 分流组设计 ======
 proxy-groups:
-  # 1) 全局总开关：你可以在面板里随时切换策略
-  - name: GLOBAL
-    type: select
-    proxies:
-      - DIRECT
-      - AI
-      - FOREIGN
-      - PROXY
-      - GAME-CN
-      - REJECT
-
-  # 2) 国外AI专用：默认走国外（可手动切换）
-  - name: AI
-    type: select
-    proxies:
-      - AI-AUTO
-      - RFC-JP
-      - RFC-JP-US
-      - RFC-HK
-      - RFC-HK-JP
-      - YXVM-Vol
-      - PROXY
-      - DIRECT
-
-  - name: AI-AUTO
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 80
-    proxies:
-      - RFC-JP
-      - RFC-JP-US
-      - RFC-HK
-      - RFC-HK-JP
-      - RFC-HK-KX
-      - RFC-HK-Alice
-      - YXVM-Vol
-
-  # 3) 国外通用（不特指AI）：日常外网、GitHub、Google 等
-  - name: FOREIGN
-    type: select
-    proxies:
-      - FOREIGN-AUTO
-      - RFC-HK
-      - RFC-JP
-      - RFC-JP-US
-      - YXVM-Vol
-      - PROXY
-      - DIRECT
-
-  - name: FOREIGN-AUTO
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 120
-    proxies:
-      - RFC-HK
-      - RFC-JP
-      - RFC-JP-US
-      - RFC-HK-JP
-      - YXVM-Vol
-
-  # 4) 你的“代理池”（手动挑选/兜底用）
+  # 你的要求：所有分组都包含全部节点（所以每组都复制一份全量列表）
   - name: PROXY
     type: select
     proxies:
-      - RFC-HK
-      - RFC-JP
-      - RFC-JP-US
-      - RFC-HK-JP
-      - RFC-HK-KX
-      - RFC-HK-Alice
-      - ISIF-COP-1
-      - ISIF-COP-1-Alice
-      - ISIF-COP-1-KX
-      - ISIF-COP-1-AK
+      - DIRECT
       - ISIF-COP-2
+      - RFC-JP
+      - YXVM-Vol
+      - RFC-HK-KX
+      - RFC-HK-JP
+      - RFC-HK-Alice
+      - RFC-HK
       - ISIF-COP-2-Alice
       - ISIF-COP-2-KX
       - ISIF-COP-2-AK
-      - YXVM-Vol
-      - DIRECT
+      - ISIF-COP-1-AK
+      - ISIF-COP-1-KX
+      - ISIF-COP-1
+      - ISIF-COP-1-Alice
+      - RFC-JP-US
 
-  # 5) 国内游戏：强制直连（你说国内游戏要国内）
   - name: GAME-CN
     type: select
     proxies:
       - DIRECT
+      - ISIF-COP-2
+      - RFC-JP
+      - YXVM-Vol
+      - RFC-HK-KX
+      - RFC-HK-JP
+      - RFC-HK-Alice
+      - RFC-HK
+      - ISIF-COP-2-Alice
+      - ISIF-COP-2-KX
+      - ISIF-COP-2-AK
+      - ISIF-COP-1-AK
+      - ISIF-COP-1-KX
+      - ISIF-COP-1
+      - ISIF-COP-1-Alice
+      - RFC-JP-US
+
+  - name: AI
+    type: select
+    proxies:
       - PROXY
-      - FOREIGN
+      - DIRECT
+      - ISIF-COP-2
+      - RFC-JP
+      - YXVM-Vol
+      - RFC-HK-KX
+      - RFC-HK-JP
+      - RFC-HK-Alice
+      - RFC-HK
+      - ISIF-COP-2-Alice
+      - ISIF-COP-2-KX
+      - ISIF-COP-2-AK
+      - ISIF-COP-1-AK
+      - ISIF-COP-1-KX
+      - ISIF-COP-1
+      - ISIF-COP-1-Alice
+      - RFC-JP-US
+
+  - name: NETFLIX
+    type: select
+    proxies:
+      - PROXY
+      - DIRECT
+      - ISIF-COP-2
+      - RFC-JP
+      - YXVM-Vol
+      - RFC-HK-KX
+      - RFC-HK-JP
+      - RFC-HK-Alice
+      - RFC-HK
+      - ISIF-COP-2-Alice
+      - ISIF-COP-2-KX
+      - ISIF-COP-2-AK
+      - ISIF-COP-1-AK
+      - ISIF-COP-1-KX
+      - ISIF-COP-1
+      - ISIF-COP-1-Alice
+      - RFC-JP-US
+
+  - name: EMBY
+    type: select
+    proxies:
+      - PROXY
+      - DIRECT
+      - ISIF-COP-2
+      - RFC-JP
+      - YXVM-Vol
+      - RFC-HK-KX
+      - RFC-HK-JP
+      - RFC-HK-Alice
+      - RFC-HK
+      - ISIF-COP-2-Alice
+      - ISIF-COP-2-KX
+      - ISIF-COP-2-AK
+      - ISIF-COP-1-AK
+      - ISIF-COP-1-KX
+      - ISIF-COP-1
+      - ISIF-COP-1-Alice
+      - RFC-JP-US
 
 rules:
-  # ====== 直连要求（最先匹配）======
+  # ====== 强制直连：本地 / 私网 / LAN ======
   - DOMAIN-SUFFIX,local,DIRECT
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
@@ -240,63 +248,83 @@ rules:
   - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
   - IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
 
-  # ====== 国内游戏（常见厂商/平台域名，直连）======
+  # ====== EMBY：你指定的域名 ======
+  - DOMAIN,emby.88886611.xyz,EMBY
+
+  # ====== NETFLIX（补全）======
+  # 规则集（mihomo/Meta 通常内置，能用就更省事；不能用也不影响，因为下面还有显式域名）
+  - GEOSITE,netflix,NETFLIX
+  # 主域与常见资源域
+  - DOMAIN-SUFFIX,netflix.com,NETFLIX
+  - DOMAIN-SUFFIX,netflix.net,NETFLIX
+  - DOMAIN-SUFFIX,nflxvideo.net,NETFLIX
+  - DOMAIN-SUFFIX,nflximg.net,NETFLIX
+  - DOMAIN-SUFFIX,nflximg.com,NETFLIX
+  - DOMAIN-SUFFIX,nflxso.net,NETFLIX
+  - DOMAIN-SUFFIX,nflxext.com,NETFLIX
+  # 测速/检测
+  - DOMAIN-SUFFIX,fast.com,NETFLIX
+  # 兜底关键字（尽量放在 Netflix 专用段里）
+  - DOMAIN-KEYWORD,netflix,NETFLIX
+  - DOMAIN-KEYWORD,nflx,NETFLIX
+
+  # ====== AI（补全：OpenAI / Claude / Gemini / 常见AI平台）======
+  # OpenAI / ChatGPT
+  - DOMAIN-SUFFIX,openai.com,AI
+  - DOMAIN-SUFFIX,chatgpt.com,AI
+  - DOMAIN-SUFFIX,oaistatic.com,AI
+  - DOMAIN-SUFFIX,oaiusercontent.com,AI
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net,AI
+  - DOMAIN-KEYWORD,openai,AI
+  - DOMAIN-KEYWORD,chatgpt,AI
+
+  # Anthropic / Claude
+  - DOMAIN-SUFFIX,anthropic.com,AI
+  - DOMAIN-SUFFIX,claude.ai,AI
+  - DOMAIN-KEYWORD,anthropic,AI
+  - DOMAIN-KEYWORD,claude,AI
+
+  # Google Gemini / AI Studio / Generative AI
+  - DOMAIN-SUFFIX,gemini.google.com,AI
+  - DOMAIN-SUFFIX,aistudio.google.com,AI
+  - DOMAIN-SUFFIX,makersuite.google.com,AI
+  - DOMAIN-SUFFIX,generativeai.google,AI
+  - DOMAIN-SUFFIX,ai.google.dev,AI
+  - DOMAIN-SUFFIX,googleapis.com,AI
+  - DOMAIN-SUFFIX,gstatic.com,AI
+  - DOMAIN-SUFFIX,googleusercontent.com,AI
+  - DOMAIN-KEYWORD,gemini,AI
+  - DOMAIN-KEYWORD,generativeai,AI
+
+  # Perplexity / Poe / HuggingFace / Replicate / Cohere / Mistral
+  - DOMAIN-SUFFIX,perplexity.ai,AI
+  - DOMAIN-SUFFIX,poe.com,AI
+  - DOMAIN-SUFFIX,huggingface.co,AI
+  - DOMAIN-SUFFIX,hf.co,AI
+  - DOMAIN-SUFFIX,replicate.com,AI
+  - DOMAIN-SUFFIX,cohere.com,AI
+  - DOMAIN-SUFFIX,mistral.ai,AI
+
+  # （可选兜底关键字，覆盖一些跳转/子域）
+  - DOMAIN-KEYWORD,huggingface,AI
+  - DOMAIN-KEYWORD,perplexity,AI
+
+  # ====== 国内游戏（走 GAME-CN，默认你选 DIRECT）======
   - DOMAIN-SUFFIX,qq.com,GAME-CN
   - DOMAIN-SUFFIX,tencent.com,GAME-CN
   - DOMAIN-SUFFIX,wegame.com,GAME-CN
   - DOMAIN-SUFFIX,game.qq.com,GAME-CN
   - DOMAIN-SUFFIX,msdk.qq.com,GAME-CN
-  - DOMAIN-SUFFIX,igamecj.com,GAME-CN
   - DOMAIN-SUFFIX,netease.com,GAME-CN
   - DOMAIN-SUFFIX,163.com,GAME-CN
-  - DOMAIN-SUFFIX,126.net,GAME-CN
   - DOMAIN-SUFFIX,mihoyo.com,GAME-CN
-  - DOMAIN-SUFFIX,miHoYo.com,GAME-CN
   - DOMAIN-SUFFIX,hoyoverse.com,GAME-CN
-  - DOMAIN-SUFFIX,biligame.com,GAME-CN
   - DOMAIN-SUFFIX,bilibili.com,GAME-CN
-  - DOMAIN-SUFFIX,ppgame.com,GAME-CN
+  - DOMAIN-SUFFIX,biligame.com,GAME-CN
 
-  # ====== 国外 AI（强制走 AI 组）======
-  - DOMAIN-SUFFIX,openai.com,AI
-  - DOMAIN-SUFFIX,chatgpt.com,AI
-  - DOMAIN-SUFFIX,oaistatic.com,AI
-  - DOMAIN-SUFFIX,oaiusercontent.com,AI
-  - DOMAIN-SUFFIX,anthropic.com,AI
-  - DOMAIN-SUFFIX,claude.ai,AI
-  - DOMAIN-SUFFIX,googleapis.com,AI
-  - DOMAIN-SUFFIX,generativeai.google,AI
-  - DOMAIN-SUFFIX,gemini.google.com,AI
-  - DOMAIN-SUFFIX,ai.google,AI
-  - DOMAIN-SUFFIX,deepmind.com,AI
-  - DOMAIN-SUFFIX,huggingface.co,AI
-  - DOMAIN-SUFFIX,hf.co,AI
-  - DOMAIN-SUFFIX,replicate.com,AI
-  - DOMAIN-SUFFIX,perplexity.ai,AI
-  - DOMAIN-SUFFIX,cohere.com,AI
-  - DOMAIN-SUFFIX,mistral.ai,AI
-  - DOMAIN-SUFFIX,poe.com,AI
-  - DOMAIN-SUFFIX,character.ai,AI
-
-  # ====== 其他国外常用（走 FOREIGN）======
-  - DOMAIN-SUFFIX,github.com,FOREIGN
-  - DOMAIN-SUFFIX,githubusercontent.com,FOREIGN
-  - DOMAIN-SUFFIX,gitlab.com,FOREIGN
-  - DOMAIN-SUFFIX,google.com,FOREIGN
-  - DOMAIN-SUFFIX,gstatic.com,FOREIGN
-  - DOMAIN-SUFFIX,youtube.com,FOREIGN
-  - DOMAIN-SUFFIX,ytimg.com,FOREIGN
-  - DOMAIN-SUFFIX,facebook.com,FOREIGN
-  - DOMAIN-SUFFIX,twitter.com,FOREIGN
-  - DOMAIN-SUFFIX,x.com,FOREIGN
-  - DOMAIN-SUFFIX,telegram.org,FOREIGN
-  - DOMAIN-SUFFIX,discord.com,FOREIGN
-
-  # ====== 智能国内/国外（Meta 支持 GEOSITE）======
-  # 国内域名直连
+  # ====== 国内必须直连（压住最后兜底 PROXY）======
   - GEOSITE,CN,DIRECT
-  # 国内 IP 直连
   - GEOIP,CN,DIRECT
 
-  # 兜底：剩下全部走你全局选择
-  - MATCH,GLOBAL
+  # ====== 漏网之鱼：最后全部走 PROXY ======
+  - MATCH,PROXY
