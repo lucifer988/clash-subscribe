@@ -13,13 +13,6 @@ proxies:
     username: test
     password: 123456
 
-  - name: YXVM-Vol
-    type: socks5
-    server: 192.168.88.102
-    port: 1080
-    username: test
-    password: 123456
-
   - name: RFC-HK-KX
     type: socks5
     server: 192.168.88.105
@@ -113,7 +106,7 @@ proxies:
 
   - name: HK-Vol
     type: socks5
-    server: 192.168.88.107
+    server: 192.168.88.102
     port: 28168
     username: test
     password: 123456
