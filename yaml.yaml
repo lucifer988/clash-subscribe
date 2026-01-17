@@ -110,3 +110,10 @@ proxies:
     port: 28168
     username: test
     password: 123456
+    
+  - name: RFC-JP-CO-Mini-GG
+    type: socks5
+    server: 192.168.88.107
+    port: 42414
+    username: test
+    password: 123456
