@@ -93,7 +93,7 @@ proxies:
   - name: RFC-JP-US
     type: socks5
     server: 192.168.88.108
-    port: 35149
+    port: 17899
     username: test
     password: 123456
 
