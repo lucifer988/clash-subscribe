@@ -16,7 +16,7 @@ proxies:
   - name: RFC-HK-KX
     type: socks5
     server: 192.168.88.105
-    port: 29301
+    port: 40142
     username: test
     password: 123456
 
