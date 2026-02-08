@@ -99,7 +99,7 @@ proxies:
 
   - name: RFC-JP-CO-Mini
     type: socks5
-    server: 192.168.88.109
+    server: 192.168.88.107
     port: 23624
     username: test
     password: 123456
@@ -120,7 +120,7 @@ proxies:
     
   - name: RFC-JP-CO-Mini-GG
     type: socks5
-    server: 192.168.88.109
+    server: 192.168.88.107
     port: 17522
     username: test
     password: 123456
