@@ -1,14 +1,14 @@
 proxies:
-  - name: ISIF-COP-2
+  - name: ISIF-COP-1
     type: socks5
-    server: 192.168.88.103
-    port: 29923
+    server: 192.168.88.100
+    port: 36119
     username: test
     password: 123456
 
-  - name: RFC-JP
+  - name: ISIF-COP-1
     type: socks5
-    server: 192.168.88.108
-    port: 21966
+    server: 192.168.88.101
+    port: 25871
     username: test
     password: 123456
