@@ -12,3 +12,10 @@ proxies:
     port: 25871
     username: test
     password: 123456
+
+  - name: US-GIA
+    type: socks5
+    server: 192.168.88.102
+    port: 1080
+    username: test
+    password: 123456
