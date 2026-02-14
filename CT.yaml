@@ -6,7 +6,7 @@ proxies:
     username: test
     password: 123456
 
-  - name: ISIF-COP-1
+  - name: ISIF-COP-2
     type: socks5
     server: 192.168.88.101
     port: 25871
