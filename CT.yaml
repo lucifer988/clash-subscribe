@@ -9,7 +9,7 @@ proxies:
   - name: ISIF-COP-2
     type: socks5
     server: 192.168.88.101
-    port: 24622
+    port: 40813
     username: test
     password: 123456
 
