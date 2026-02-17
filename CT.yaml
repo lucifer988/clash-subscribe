@@ -23,6 +23,6 @@ proxies:
   - name: JP-CO
     type: socks5
     server: 192.168.88.103
-    port: 22996
+    port: 20225
     username: test
     password: 123456
