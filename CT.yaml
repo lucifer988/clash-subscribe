@@ -20,6 +20,13 @@ proxies:
     username: test
     password: 123456
     
+  - name: US-GIA-咸鱼-GG
+    type: socks5
+    server: 192.168.88.103
+    port: 17732
+    username: test
+    password: 123456
+    
   - name: US-GIA-艾云
     type: socks5
     server: 192.168.88.102
