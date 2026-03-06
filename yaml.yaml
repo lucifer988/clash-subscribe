@@ -104,10 +104,10 @@ proxies:
     username: test
     password: 123456
 
-  - name: Lamhost-JP
+  - name: ISIF-COP-1-GG-HK
     type: socks5
-    server: 192.168.88.102
-    port: 28168
+    server: 192.168.88.100
+    port: 36379
     username: test
     password: 123456
 
@@ -118,9 +118,9 @@ proxies:
     username: test
     password: 123456
     
-  - name: RFC-JP-CO-Mini-GG
+  - name: ISIF-COP-1-GG-HK
     type: socks5
-    server: 192.168.88.109
-    port: 17522
+    server: 192.168.88.100
+    port: 26102
     username: test
     password: 123456
