@@ -33,3 +33,10 @@ proxies:
     port: 27022
     username: test
     password: 123456
+你帮我配置openclaw,我需要通过/models来切换模型，一共配置3个命名分别为1 2 3，只需要gpt-5.4这个模型，分别是
+地址：https://aixj.vip 
+API:sk-b2e2a4f330a2dcbf78737f9c59bcd28ea95bda61f216cb31f8cd70382fbe7ed5
+地址：https://www.easycodex.cn    
+API:sk-41e926205550bd142bcf747a15b292cd2295f01bc637ae40f7ee3434c1d92735
+地址：https://code.newcli.com/codex   
+API:sk-ant-oat01-HlduBF8sLy3yYCIbzpd4OF6P7nbR7YnTilQfwLV94mppwSxKRettS9VB1rCv8QqydYffbXXJBGV4P-Y-yGiNhebj4EntcAA
