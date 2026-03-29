@@ -131,3 +131,11 @@ proxies:
     port: 26102
     username: test
     password: 123456
+
+  - name: NNNC-JP
+    type: socks5
+    server: 192.168.88.104
+    port: 35991
+    username: test
+    password: 123456
+  
