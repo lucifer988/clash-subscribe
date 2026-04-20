@@ -6,41 +6,6 @@ proxies:
     username: test
     password: 123456
 
-  - name: RFC-JP
-    type: socks5
-    server: 192.168.88.104
-    port: 19023
-    username: test
-    password: 123456
-
-  - name: RFC-HK-KX
-    type: socks5
-    server: 192.168.88.105
-    port: 40142
-    username: test
-    password: 123456
-
-  - name: RFC-HK-JP
-    type: socks5
-    server: 192.168.88.105
-    port: 33687
-    username: test
-    password: 123456
-
-  - name: RFC-HK-Alice
-    type: socks5
-    server: 192.168.88.105
-    port: 31759
-    username: test
-    password: 123456
-
-  - name: RFC-HK
-    type: socks5
-    server: 192.168.88.105
-    port: 27560
-    username: test
-    password: 123456
-
   - name: ISIF-COP-2-Alice
     type: socks5
     server: 192.168.88.103
@@ -97,13 +62,6 @@ proxies:
     username: test
     password: 123456
 
-  - name: RFC-JP-US
-    type: socks5
-    server: 192.168.88.108
-    port: 17899
-    username: test
-    password: 123456
-
   - name: GIA
     type: socks5
     server: 192.168.88.107
@@ -132,10 +90,10 @@ proxies:
     username: test
     password: 123456
 
-  - name: NNC-JP
+  - name: DE
     type: socks5
     server: 192.168.88.104
-    port: 35991
+    port: 27511
     username: test
     password: 123456
   
