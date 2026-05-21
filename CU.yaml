@@ -64,8 +64,8 @@ proxies:
 
   - name: GIA
     type: socks5
-    server: 192.168.88.107
-    port: 24614
+    server: 192.168.88.102
+    port: 40898
     username: test
     password: 123456
 
@@ -78,8 +78,8 @@ proxies:
 
   - name: YXVM-Vol
     type: socks5
-    server: 192.168.88.102
-    port: 33313
+    server: 192.168.88.105
+    port: 31340
     username: test
     password: 123456
     
@@ -90,10 +90,10 @@ proxies:
     username: test
     password: 123456
 
-  - name: DE
+  - name: RFC
     type: socks5
     server: 192.168.88.104
-    port: 27511
+    port: 31677
     username: test
     password: 123456
   
