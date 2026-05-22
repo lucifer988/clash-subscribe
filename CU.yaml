@@ -90,7 +90,7 @@ proxies:
     username: test
     password: 123456
 
-  - name: RFC
+  - name: 4837
     type: socks5
     server: 192.168.88.104
     port: 31677
