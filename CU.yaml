@@ -93,7 +93,7 @@ proxies:
   - name: 4837
     type: socks5
     server: 192.168.88.104
-    port: 31677
+    port: 12099
     username: user_nOBf6epP
     password: lacHe5XLQthJ7QqNFWtP
   
