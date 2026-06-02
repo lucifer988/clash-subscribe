@@ -1,10 +1,10 @@
 proxies:
-  - name: ISIF-COP-2
+  - name: ISIF-COP-1
     type: socks5
-    server: 192.168.88.103
-    port: 29923
-    username: test
-    password: 123456
+    server: 192.168.88.100
+    port: 29328
+    username: user_ckCGmYnF
+    password: YyEYf4tGsRRMJBWpQwWw
 
   - name: ISIF-COP-2-Alice
     type: socks5
